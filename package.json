@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "yarn build",
+    "predeploy": "yarn build && cp CNAME dist",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
