@@ -17,9 +17,7 @@ export const Hero = () => {
               Trusted Telehealth · Licensed Providers
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              America's most trusted{" "}
-              <span className="text-brand">GLP-1 Weight Loss</span> Program is
-              ready for you.
+              Trusted Treatment. <span className="text-brand">Wellness for All </span>
             </h1>
             <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
               Doctor-reviewed treatment plans, fast home delivery, and ongoing
