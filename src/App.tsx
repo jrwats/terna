@@ -1,28 +1,30 @@
-import ternaImg from "./assets/terna_health.png"
 import "./App.css"
+import { Navbar } from "./components/Navbar"
+import { Hero } from "./components/Hero"
+import { Products } from "./components/Products"
+import { HowItWorks } from "./components/HowItWorks"
+import { Plans } from "./components/Plans"
+import { Testimonials } from "./components/Testimonials"
+import { Features } from "./components/Features"
+import { DoctorSection } from "./components/DoctorSection"
+import { FAQ } from "./components/FAQ"
+import { Footer } from "./components/Footer"
 
 const App = () => {
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={ternaImg} className="base" alt="" />
-        </div>
-        <div>
-          <p>Coming soon</p>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <image href="/images/ternahealth.png" />
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <Navbar />
+      <main>
+        <Hero />
+        <Products />
+        <HowItWorks />
+        <Plans />
+        <Testimonials />
+        <Features />
+        <DoctorSection />
+        <FAQ />
+      </main>
+      <Footer />
     </>
   )
 }
