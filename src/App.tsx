@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import ternaImg from './assets/terna_health.png'
-import './App.css'
+import ternaImg from "./assets/terna_health.png"
+import "./App.css"
 
 const App = () => {
-
   return (
     <>
       <section id="center">
         <div className="hero">
-          <img src={ternaImg} className="base"  alt="" />
+          <img src={ternaImg} className="base" alt="" />
         </div>
         <div>
           <p>Coming soon</p>
