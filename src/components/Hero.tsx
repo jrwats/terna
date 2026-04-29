@@ -1,17 +1,16 @@
+import { useEffect, useRef } from "react"
 import heroBg from "../assets/landing.png"
 import heroBgMobile from "../assets/landing_mobile.png"
 
-const TRUST_BADGES = [
+const BADGES = [
   "Licensed Medical Providers",
   "Free Home Delivery",
   "HIPAA Compliant",
   "Third-party tested",
   "HSA/FSA Eligible",
-];
-TRUST_BADGES.push.apply(TRUST_BADGES, TRUST_BADGES);
+]
 
 export const Hero = () => {
-
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-black">
       {/* Background photo — responsive */}
@@ -33,15 +32,6 @@ export const Hero = () => {
       {/* Content — pinned to bottom */}
       <div id="mainContent" className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24 pt-40">
         <div id="mainText" className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
-          {/* Eyebrow */}
-          {/*
-          <div className="animate-hero-1">
-            <span className="inline-block px-4 py-1.5 bg-white/10 text-white/90 text-xs font-semibold rounded-full uppercase tracking-[0.12em] border border-white/20 mb-6 backdrop-blur-sm">
-              Licensed Providers · Third-party tested
-            </span>
-          </div>
-          */}
-
           {/* Headline */}
           <h1 className="animate-hero-2 text-4xl sm:text-5xl lg:text-5xl font-bold text-white leading-[1.05] mb-6">
             Trusted Treatment.
@@ -70,20 +60,17 @@ export const Hero = () => {
               See How It Works
             </a>
           </div>
-
         </div>
 
-        {/* Trust badges — marquee, full container width */}
+        {/* Trust badges — rAF-driven marquee, full container width */}
         <div id="trustBadges" className="animate-hero-5 overflow-hidden mt-10">
-          <div className="flex animate-marquee">
-            {TRUST_BADGES.map((text, i) => ( <TrustBadge key={i} text={text} />))}
-          </div>
+          <TrustMarquee />
         </div>
 
         {/* Stats bar */}
         <div className="animate-hero-6 mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-white/10 pt-10">
           {[
-            { number: "50,000+", label: "Members" },
+            // { number: "50,000+", label: "Members" },
             { number: "15–25%", label: "Avg. Body Weight Lost" },
             { number: "48 hrs", label: "Avg. Prescription Approval" },
             { number: "4.9 ★", label: "Average Rating" },
@@ -99,6 +86,48 @@ export const Hero = () => {
   )
 }
 
+const TrustMarquee = () => {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const xRef = useRef(0)
+  const rafRef = useRef(0)
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const tick = () => {
+      xRef.current -= 0.15;
+
+      const first = track.firstElementChild as HTMLElement | null
+      if (first) {
+        if (first.offsetLeft + first.offsetWidth + xRef.current < 0) {
+          const second = first.nextElementSibling as HTMLElement | null
+          const gap = second
+            ? second.offsetLeft - first.offsetLeft - first.offsetWidth
+            : 40
+          track.appendChild(first)
+          xRef.current += first.offsetWidth + gap
+        }
+      }
+
+      track.style.transform = `translateX(${xRef.current}px)`
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [])
+
+  return (
+    <div ref={trackRef} className="flex">
+      {/* Render two passes so the track always fills the viewport on mount */}
+      {[...BADGES, ...BADGES].map((text, i) => (
+        <TrustBadge key={i} text={text} />
+      ))}
+    </div>
+  )
+}
+
 const TrustBadge = ({ text }: { text: string }) => (
   <div className="flex items-center gap-2 text-sm text-white/75 flex-shrink-0 mr-10">
     <span className="w-4 h-4 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
@@ -106,6 +135,7 @@ const TrustBadge = ({ text }: { text: string }) => (
         <path
           d="M1 6l3.5 3.5L11 2"
           stroke="#2a3a2e"
+          // stroke="#300a30"
           strokeWidth="2"
           fill="none"
           strokeLinecap="round"

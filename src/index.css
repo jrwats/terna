@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 @theme {
+  --color-brand: #9333ea;
+  --color-brand-dark: #7e22ce;
+  --color-brand-light: #e879f9;
+  --color-brand-bg: #fdf4ff;
+  --color-brand-mid: #d946ef;
+  --color-site-dark: #300a30;
+  --color-site-dark-mid: #4a1060;
+
   --color-brand: #3a5a40;
   --color-brand-dark: #2d4a35;
   --color-brand-light: #c5f467;
@@ -8,6 +16,12 @@
   --color-brand-mid: #d4f99c;
   --color-site-dark: #2a3a2e;
   --color-site-dark-mid: #3a5a40;
+
+  --color-brand: #9333ea;
+  --color-brand-dark: #7e22ce;
+  --color-site-dark: #300a30;
+  --color-site-dark-mid: #4a1060;
+
   --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Playfair Display", serif;
 }
@@ -31,6 +45,30 @@ body {
 h1,
 h2 {
   font-family: "Playfair Display", serif;
+}
+
+/* ── Navbar scroll-driven background ──────────────────────────── */
+
+@keyframes nav-bg {
+  from {
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    box-shadow: none;
+  }
+  to {
+    background-color: rgb(48 10 48 / 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgb(0 0 0 / 0.3);
+  }
+}
+
+.nav-scroll-bg {
+  animation-name: nav-bg;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-duration: 1ms;
+  animation-timeline: scroll(root);
+  animation-range: 0px 80px;
 }
 
 /* ── Hero entrance animations ──────────────────────────────────── */
@@ -95,17 +133,6 @@ h2 {
   animation: fade-up-blur 0.7s cubic-bezier(0, 0, 0.2, 1) 1.05s both;
 }
 
-/* ── Trust-badge marquee ───────────────────────────────────────── */
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 22s linear infinite;
-  will-change: transform;
-}
 
 /* ── Scroll-reveal (IntersectionObserver driven) ───────────────── */
 

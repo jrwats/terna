@@ -12,8 +12,9 @@ export const Navbar = () => {
     { label: "FAQ", href: "#faq" },
   ]
 
+    // <nav className="animate-nav nav-scroll-bg sticky top-0 z-50">
   return (
-    <nav className="animate-nav sticky top-0 z-50 bg-transparent">
+    <nav id="navBar" className=" nav-scroll-bg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
